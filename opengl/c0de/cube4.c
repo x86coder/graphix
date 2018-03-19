@@ -1,3 +1,7 @@
+// Color cube in OpenGL (using additional freeglut library)
+// Date: March 2018
+// Author: Jaime Reyes
+
 #include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -14,9 +18,6 @@ int rotationQ = 1;
 int t0 = 0;
 
 int trigger(int param){
-
-    //t0 = localtime();
-
     draw();
     glutTimerFunc( 1000 / SCREEN_FPS, trigger, 1);
 
@@ -119,14 +120,12 @@ int teclas(unsigned char key, int x, int y){
 }
 
 int init(){
-    /*  select clearing (background) color       */
         glClearColor ( 0x16/255.0f, 0x04/255.0f, 0x16/255.0f, 0.0); // #363636 color
 
-    /*  initialize viewing values  */
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        //glOrtho(0.0, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0, -1.0, 1.0); // left, right, bottom, top, near, far
-        glOrtho(0.0, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0, -(SCREEN_WIDTH/2.0f), (SCREEN_HEIGHT/2.0f) );
+
+        glOrtho(0.0, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0, -(SCREEN_WIDTH/2.0f), (SCREEN_HEIGHT/2.0f) ); // left, right, bottom, top, near, far
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -142,12 +141,13 @@ int init(){
 
 int main(int argc, char **argv){
 
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
     glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
     // centrar ventana
     glutInitWindowPosition(800-(800-SCREEN_WIDTH)/4,600-(600-SCREEN_HEIGHT)/4);
+
     glutCreateWindow("cube4 (amd64)");
 
     init();
